@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Test iframe</title>
+	<style type="text/css">
+		span{
+			display: inline-block;
+			padding: 5px 10px;
+			background: #e9e9e9;
+			border-radius: 5px;
+			margin-bottom: 15px;
+			cursor: pointer;
+		}
+
+
+	</style>
+</head>
+<body>
+	<span id="eliminar-ultimo">Eliminar el último elemento</span>
+
+	<iframe id="iframe-test" width="100%" height="300px" src="iframe.html"></iframe>
+
+	<p id="mensaje"></p>
+
+	<script type="text/javascript">
+		// Resibe mensajes del iframe
+		window.onmessage = function(event) {
+		    if(event.data.tipo_mensaje == 'click_mes'){
+		        // función que se encargará de procesar la información según el tipo
+		        document.getElementById('mensaje').innerText = event.data.mensaje;
+		    }
+
+		    if(event.data.tipo_mensaje == 'confirma_eliminacion'){
+		        // función que se encargará de procesar la información según el tipo
+		        document.getElementById('mensaje').innerText = event.data.mensaje;
+		    }
+		    
+		};
+
+		document.getElementById('eliminar-ultimo').addEventListener("click", function () {
+			const miIframe = document.getElementById("iframe-test");
+			miIframe.contentWindow.postMessage({tipo_mensaje:"eliminar_ultimo"}, "*");
+		});
+
+	</script>
+</body>
+</html>
