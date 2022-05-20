@@ -38,6 +38,7 @@
 		    }
 		};
 
+		// recibe mensaje de la página
 		window.addEventListener('message', receiver, false);
 		function receiver(event) {
 		  if(event.data.tipo_mensaje == 'eliminar_ultimo'){
@@ -51,6 +52,7 @@
   			var ultimo = select[select.length-1];
   			ultimo.parentNode.removeChild(ultimo);
 
+  			// envia mensaje a la página
   			parent.postMessage({tipo_mensaje:"confirma_eliminacion", mensaje: "Se eliminó el último elemento de la lista: "+ultimo.innerText}, "*");
 		}
 		
